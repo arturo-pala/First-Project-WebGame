@@ -86,5 +86,77 @@ function collision(b,p){
     p.left = p.x;
     p.right = p.x + p.width;
 
-    
+    b.top = b.y - b.radius;
+    b.bottom = b.y + b.radius;
+    b.left = b.x - b.radius;
+    b.right = b.x + b.radius;
+
+    return p.left < b.right && p.top < b.bottom && p.right > b.left && p.bottom > b,top;
 }
+
+function update(){
+
+    if(ball.x - ball.radius < 0){
+        com.score++;
+        comScore.play();
+        resetBall();
+    } 
+    elseif(ball.x + ball.radius > canvas.width){
+        user.score++;
+        userScore.play();
+        resetBall();
+    }
+
+ball.x += ball.velocityX;
+ball.y += ball.velocityY;
+
+
+com.y += ((ball.y - (com.y + com.height/2)))*0.1;
+
+if(ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height){
+    ball.velocityY = -ball.velocityY;
+    WebGLSampler.play();
+}
+
+let player = (ball.x + ball.radius < canvas,width/2) ? user: com;
+
+if(collision(ball,player)){
+    let collidePoint = (ball.y - (player.y + player.height/2));
+    collidePoint = collidePoint / (player.height/2);
+
+    let angleRad = (Math.PI/4) * collidePoint;
+
+    let direction = (ball.x + ball.radius < canvas.width/2) ? 1: -1;
+    ball.velocityX = direction *ball.speed * Math.cos(angleRad);
+    ball.velocityY = ball.speed * Math.sin(angleRad);
+
+    ball.speed += 0,1;
+    }
+}
+
+
+function render(){
+
+    drawRect(0, 0, canvas.width, canvas.height, "#000");
+
+    drawText(user.score,canvas.width/4,canvas.height/5);
+
+    drawText(com.score,3*canvas.width/4,canvas.height/5);
+
+    drawNet();
+
+    drawRect(user.x, user.y, user,width, user.height, user.color);
+
+    drawRect(com.x, com.y, com.width, com.height, com.color);
+
+    drawArc(ball.x, ball.y, ball.radius, ball.color);
+}
+
+function game(){
+    update();
+    render();
+}
+
+let framePerSecond = 100;
+
+let loop = SetInterval(game,1000/framePerSecond);
