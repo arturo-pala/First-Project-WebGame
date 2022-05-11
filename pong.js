@@ -7,37 +7,37 @@ const ctx = canvas.getContext('2d');
 const ball = {
     x:canvas.width/2,
     y:canvas.height/2,
-    radius:10,
-    velocityX:6,
-    velocityY:6,
-    speed:8,
-    color: white
+    radius: 10,
+    velocityX: 5,
+    velocityY: 5,
+    speed: 8,
+    color: "white"
 }
 
 const user= {
-    x:1,
+    x: 0,
     y:(canvas.height - 100)/2,
-    width:11,
-    height:100,
-    score:0,
-    color:white
+    width: 10,
+    height: 100,
+    score: 0,
+    color: "white"
 }
 
 const com = {
-    x:canvas.width - 10,
-    y:(canvas.height - 100)/2,
-    width:11,
-    height:100,
-    score:0,
-    color:white
+    x: canvas.width - 10,
+    y: (canvas.height - 100)/2,
+    width: 10,
+    height: 100,
+    score: 0,
+    color: "white"
 }
 
 const net = {
     x:(canvas.width - 2)/2,
-    y:0,
-    height:10,
-    width:2,
-    color:white
+    y: 0,
+    height: 10,
+    width: 2,
+    color: "white"
 }
 
 function drawRect(x, y, w, h, color){
@@ -133,7 +133,6 @@ if(collision(ball,player)){
 
     ball.speed += 0,1;
     }
-
 
 
 function render(){
