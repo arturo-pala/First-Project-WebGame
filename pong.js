@@ -101,11 +101,12 @@ function update(){
         comScore.play();
         resetBall();
     } 
-    elseif(ball.x + ball.radius > canvas.width){
+    elseif(ball.x + ball.radius > canvas.width)
         user.score++;
         userScore.play();
         resetBall();
     }
+
 
 ball.x += ball.velocityX;
 ball.y += ball.velocityY;
@@ -132,7 +133,7 @@ if(collision(ball,player)){
 
     ball.speed += 0,1;
     }
-}
+
 
 
 function render(){
